@@ -12,11 +12,13 @@ def insert():
 
     cursor = conn.cursor()
 
-    id = 1
-    name = "Test"
-    age = 23
+    user_id = '1234332'
+    details = 'purchase new cards'
+    category = 'Magic The Gathering'
+    amount = 1705
+    class_ = 'debit'
 
-    cursor.execute(f"INSERT INTO your_table_name (id, name, age) VALUES ('{id}', '{name}', '{age}')")
+    cursor.execute(f"INSERT INTO transactions (user_id, details, category, amount, class) VALUES ('{user_id}', '{details}', '{category}', '{amount}', '{class_}')")
 
     # Committing the changes
     conn.commit()
@@ -31,4 +33,4 @@ def insert():
         "message": "Success Insert transaction"
     }
 
-    return jsonify(data)
+    return data

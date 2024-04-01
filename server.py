@@ -34,7 +34,9 @@ def test_server():
 
 @app.route('/insert', methods=['POST', 'GET'])
 def insert_router():
-    return insert()
+    rep = insert()
+    # return jsonify(rep)
+    return jsonify({"msg": 200})
 
 if __name__ == '__main__':
     app.run(debug=True)
