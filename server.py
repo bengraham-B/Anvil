@@ -1,8 +1,11 @@
 from flask import Flask,jsonify,request
+from flask_cors import CORS
 from insert_transaction import insert
 
 print("Goose")
 app = Flask(__name__)
+
+CORS(app)
 
 
 
@@ -34,7 +37,7 @@ def test_server():
 
 @app.route('/insert', methods=['POST', 'GET'])
 def insert_router():
-    rep = insert()
+    # rep = insert()
     # return jsonify(rep)
     return jsonify({"msg": 200})
 
