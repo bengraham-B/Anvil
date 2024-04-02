@@ -1,11 +1,12 @@
-from flask import Flask,jsonify,request
-from flask_cors import CORS
+from flask import Flask, request, jsonify
+from flask_cors import CORS, cross_origin
 from insert_transaction import insert
 
 print("Goose")
 app = Flask(__name__)
 
 CORS(app)
+app.config['CORS_HEADERS'] = 'Content-Type'
 
 
 
@@ -18,6 +19,7 @@ def home():
         }
 
         return jsonify(data)
+
 
     return "Server is working"
 
@@ -36,10 +38,24 @@ def test_server():
 
 
 @app.route('/insert', methods=['POST', 'GET'])
+@cross_origin()
 def insert_router():
-    # rep = insert()
-    # return jsonify(rep)
-    return jsonify({"msg": 200})
+    if request.method == "GET":
+        res_data = {
+            "status": "200",
+            "message": "Insert is working - GET Request"
+        }
+
+        return jsonify(res_data)
+
+    elif request.method == "POST":
+        print("=============================================================")
+        data = request.json
+        print(data)
+        print(request.get_data())
+        # print(request.headers)
+        rep = insert(user_id=data.get("user_id"), details=data.get("details"), category=data.get("category"), amount=data.get("amount"), class_=data.get("class"))
+        return jsonify(rep)
 
 if __name__ == '__main__':
     app.run(debug=True)
