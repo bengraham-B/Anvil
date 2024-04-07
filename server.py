@@ -11,6 +11,7 @@ CORS(app)
 app.config['CORS_HEADERS'] = 'Content-Type'
 
 @app.route('/', methods=["GET"])
+@cross_origin()
 def home():
     if request.method == "GET":
         data = {
@@ -25,6 +26,7 @@ def home():
 
 
 @app.route('/test', methods=["GET"])
+@cross_origin()
 def test_server():
     if request.method == "GET":
         data = {
@@ -75,6 +77,25 @@ def get_transactions_router():
         }
 
         return jsonify(data)
+
+@app.route("/save_category", methods=["POST"])
+@cross_origin()
+def save_category():
+    if request.method == "POST":
+        data = {
+            "status": 200,
+            "message": "Route is working"
+        }
+
+        return jsonify(data)
+
+    else:
+        data = {
+                "status": 501,
+                "message": "Wrong method"
+        }
+        return jsonify(data)
+
 
 if __name__ == '__main__':
     app.run(debug=True)
