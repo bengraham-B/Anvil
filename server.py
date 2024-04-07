@@ -3,6 +3,8 @@ from flask_cors import CORS, cross_origin
 
 from insert_transaction import insert
 from get_transactions import get_transactions
+from save_category import save_category_db
+from get_categories import get_categories_db
 
 print("Goose")
 app = Flask(__name__)
@@ -82,20 +84,57 @@ def get_transactions_router():
 @cross_origin()
 def save_category():
     if request.method == "POST":
-        data = {
-            "status": 200,
-            "message": "Route is working"
-        }
+        data = request.json
+        print(data)
+        user_category = save_category_db(name=data.get("name"), user_id=data.get("user_id"))
 
-        return jsonify(data)
+        print(user_category['status'])
+        print("===========================================")
+        if user_category['status'] == 200:
+            data = {
+                "status": 200,
+                "message": "Route is working"
+            }
 
+            return jsonify(user_category)
+
+        else:
+            data = {
+                "status": 400,
+                "Message": "Category Not Saved"
+            }
+
+            return jsonify(user_category)
     else:
         data = {
                 "status": 501,
                 "message": "Wrong method"
         }
+
+@app.route("/get_categories", methods=["POST"])
+@cross_origin()
+def get_categories():
+    if request.method == "POST":
+        data = request.json
+
+        category_array = get_categories_db(user_id=data.get("user_id"))
+
+        data = {
+            "status": 200,
+            "message": "Works",
+            "categories": category_array
+        }
         return jsonify(data)
 
+    else:
+        data = {
+                "status": 400,
+                "Message": "Category Not Saved"
+            }
+
+        return jsonify(data)
+
+    
 
 if __name__ == '__main__':
     app.run(debug=True)
