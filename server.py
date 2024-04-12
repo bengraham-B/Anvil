@@ -62,7 +62,8 @@ def insert_router():
 def get_transactions_router():
 
     if request.method == "POST":
-        user_records = get_transactions("d14637")
+        data = request.json
+        user_records = get_transactions(user_id=data.get("user_id"))
 
         data = {
             "status": 200,
