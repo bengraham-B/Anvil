@@ -8,11 +8,20 @@ def insert(user_id, details, category, amount, class_):
     '''
         This function handles inserting transactions intothe DB.
     '''
+
+    # Checking if the amount value is a Float
+    if type(amount) is not float:
+        data = {
+            "status": "400",
+            "message": "Amount is not float"
+        }
+        return data
+
     print("insert function")
 
     cursor = conn.cursor()
 
-    cursor.execute(f"INSERT INTO transaction (user_id, details, category, amount, class) VALUES ('{user_id}', '{details}', '{category}', '{int(amount)}', '{class_}')")
+    cursor.execute(f"INSERT INTO transaction (user_id, details, category, amount, class) VALUES ('{user_id}', '{details}', '{category}', '{float(amount)}', '{class_}')")
 
     # Committing the changes
     conn.commit()

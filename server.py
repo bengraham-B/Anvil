@@ -41,7 +41,7 @@ def test_server():
     return "Server is working"
 
 
-@app.route('/insert', methods=['POST', 'GET'])
+@app.route('/save_transaction', methods=['POST', 'GET'])
 @cross_origin()
 def insert_router():
     if request.method == "GET":
@@ -53,7 +53,10 @@ def insert_router():
 
     elif request.method == "POST":
         data = request.json
-        rep = insert(user_id=data.get("user_id"), details=data.get("details"), category=data.get("category"), amount=data.get("amount"), class_=data.get("class"))
+        int_amount = data.get("amount")
+        print(int_amount)
+        print("============================================================")
+        rep = insert(user_id=data.get("user_id"), details=data.get("details"), category=data.get("category"), amount=float(data.get("amount")), class_=data.get("class"))
         return jsonify(rep)
     
 
