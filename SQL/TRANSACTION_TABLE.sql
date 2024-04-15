@@ -7,3 +7,8 @@ CREATE TABLE transaction(
     class VARCHAR(255),
     date DATE
 );
+
+ALTER TABLE transaction  
+    ADD month VARCHAR(255),
+    ADD year VARCHAR(255)
+

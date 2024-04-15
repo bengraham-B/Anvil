@@ -56,7 +56,7 @@ def insert_router():
         int_amount = data.get("amount")
         print(int_amount)
         print("============================================================")
-        rep = insert(user_id=data.get("user_id"), details=data.get("details"), category=data.get("category"), amount=float(data.get("amount")), class_=data.get("class"))
+        rep = insert(user_id=data.get("user_id"), details=data.get("details"), category=data.get("category"), amount=float(data.get("amount")), class_=data.get("class"), date=data.get("date"))
         return jsonify(rep)
     
 
