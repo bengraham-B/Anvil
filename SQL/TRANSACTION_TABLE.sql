@@ -12,3 +12,5 @@ ALTER TABLE transaction
     ADD month VARCHAR(255),
     ADD year VARCHAR(255)
 
+ALTER TABLE transaction
+    ADD day VARCHAR(255)

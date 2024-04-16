@@ -11,15 +11,19 @@ def formate_date_anvil(date):
         3: "Mar",
         4: "Apr",
         5: "May",
-        6: "June"
+        6: "June",
+        7: "July",
+        8: "Aug",
+        9: "Sept",
+        10: "Oct",
+        11: "Nov",
+        12: "Dec"
     }
 
     month = date_array[1] 
     if month[0] == "0":
         month_num = month.replace("0", "")
-        print(month_num)
         int_month = int(month_num)
-        print(type(int_month))
 
     return_date = {
         "day": date_array[2],

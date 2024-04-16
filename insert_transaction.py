@@ -27,7 +27,8 @@ def insert(user_id, details, category, amount, class_, date):
 
     cursor = conn.cursor()
 
-    cursor.execute(f"INSERT INTO transaction (user_id, details, category, amount, class, date, month, year) VALUES ('{user_id}', '{details}', '{category}', '{float(amount)}', '{class_}', '{date}', '{date_dict.month}', '{date_dict.year}')")
+    cursor.execute(f"INSERT INTO transaction (user_id, details, category, amount, class, date, day, month, year) VALUES ('{user_id}', '{details}', '{category}', '{float(amount)}', '{class_}', '{date}', '{date_dict["day"]}','{date_dict["month"]}', '{date_dict["year"]}')")
+    print(date_dict["day"])
 
     # Committing the changes
     conn.commit()
