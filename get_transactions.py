@@ -26,8 +26,9 @@ def get_transactions(user_id):
         }
 
         records_array.append(data)
-    
-    # print(records_array)
+    print("----------")
+    print(records_array[0])
+    print("----------")
 
     cursor.close()
     conn.close()
