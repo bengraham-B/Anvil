@@ -5,6 +5,8 @@ from database import DB_conn
 from date import formate_date_anvil
 
 def insert(user_id, details, category, amount, class_, date):
+    print(date)
+    print("88888888888888888")
     conn = DB_conn()
     '''
         This function handles inserting transactions intothe DB.
@@ -18,17 +20,10 @@ def insert(user_id, details, category, amount, class_, date):
         }
         return data
 
-    print("insert function")
-
-    print(date, "-----------")
-
-    # Handle inserting Month and Day values
-    date_dict = formate_date_anvil(date)
-
     cursor = conn.cursor()
 
-    cursor.execute(f"INSERT INTO transaction (user_id, details, category, amount, class, date, day, month, year) VALUES ('{user_id}', '{details}', '{category}', '{float(amount)}', '{class_}', '{date}', '{date_dict["day"]}','{date_dict["month"]}', '{date_dict["year"]}')")
-    print(date_dict["day"])
+    cursor.execute(f"INSERT INTO transaction (user_id, details, category, amount, class, date) VALUES ('{user_id}', '{details}', '{category}', '{float(amount)}', '{class_}', '{date}')")
+    # print(date_dict["day"])
 
     # Committing the changes
     conn.commit()

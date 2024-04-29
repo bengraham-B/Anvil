@@ -1,7 +1,9 @@
 from datetime import datetime
 
 def formate_date_anvil(date):
-    date_object = datetime.fromisoformat(date.replace("Z", "+00:00"))
+    print(date)
+    print("============")
+    date_object = datetime.fromisoformat(date.replace("", "+00:00"))
     formatted_date = date_object.strftime("%Y-%m-%d")
     date_array = formatted_date.split("-")
 

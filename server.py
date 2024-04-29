@@ -5,8 +5,8 @@ from insert_transaction import insert
 from get_transactions import get_transactions
 from save_category import save_category_db
 from get_categories import get_categories_db
+from transaction_edit import edit_transaction
 
-print("Goose")
 app = Flask(__name__)
 
 CORS(app)
@@ -27,7 +27,7 @@ def home():
     return "Server is working"
 
 
-@app.route('/test', methods=["GET"])
+@app.route('/test', methods=["GET", "POST"])
 @cross_origin()
 def test_server():
     if request.method == "GET":
@@ -53,9 +53,8 @@ def insert_router():
 
     elif request.method == "POST":
         data = request.json
-        int_amount = data.get("amount")
-        print(int_amount)
-        print("============================================================")
+        print_category = data.get("category")
+        print("New Category" + print_category)
         rep = insert(user_id=data.get("user_id"), details=data.get("details"), category=data.get("category"), amount=float(data.get("amount")), class_=data.get("class"), date=data.get("date"))
         return jsonify(rep)
     
@@ -89,11 +88,8 @@ def get_transactions_router():
 def save_category():
     if request.method == "POST":
         data = request.json
-        print(data)
         user_category = save_category_db(name=data.get("name"), user_id=data.get("user_id"))
 
-        print(user_category['status'])
-        print("===========================================")
         if user_category['status'] == 200:
             data = {
                 "status": 200,
@@ -138,7 +134,33 @@ def get_categories():
 
         return jsonify(data)
 
-    
+@app.route("/edit_transaction", methods=["POST"])
+@cross_origin()
+def edit_transaction_route():
+    if request.method != "POST":
+        data = {
+            "status": 401,
+            "message": "Inccorect API Method"
 
+        }
+
+        return jsonify(data)
+
+    else:
+        data = request.json
+        print(data.get("date"))
+        print(data.get("amount"))
+        edit_response = edit_transaction(details=data.get("details"), amount=data.get("amount"), category=data.get("category"), _class=data.get("class"), date=data.get("date"), user_id=data.get("user_id"), transaction_id=data.get("transaction_id"))
+
+        data = {
+            "Statue": 200,
+            "message": "successfully Update Transaction"
+        }
+
+        if edit_response != 200:
+            print("<__0__0__>")
+        else:
+            return jsonify(data)
+        
 if __name__ == '__main__':
     app.run(debug=True)

@@ -23,16 +23,9 @@ def get_transactions(user_id):
             "amount": record[3],
             "category": record[4],
             "class": record[5],
-            "date": record[6],
-            "month": record[7],
-            "year": record[8],
-            "day": record[9]
+            "date": record[6]
         }
         records_array.append(data)
-    print("----------")
-    print(records_array[0])
-    print("----------")
-
     cursor.close()
     conn.close()
 
