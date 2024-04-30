@@ -4,7 +4,7 @@ import psycopg2
 from database import DB_conn
 from date import formate_date_anvil
 
-def insert(user_id, details, category, amount, class_, date):
+def insert(user_id, details, category, amount, class_, date, day, month, month_text, year):
     print(date)
     print("88888888888888888")
     conn = DB_conn()
@@ -22,7 +22,7 @@ def insert(user_id, details, category, amount, class_, date):
 
     cursor = conn.cursor()
 
-    cursor.execute(f"INSERT INTO transaction (user_id, details, category, amount, class, date) VALUES ('{user_id}', '{details}', '{category}', '{float(amount)}', '{class_}', '{date}')")
+    cursor.execute(f"INSERT INTO transaction (user_id, details, category, amount, class, date, day, month, month_text, year) VALUES ('{user_id}', '{details}', '{category}', '{float(amount)}', '{class_}', '{date}', '{day}', '{month}', '{month_text}', '{year}')")
     # print(date_dict["day"])
 
     # Committing the changes

@@ -55,7 +55,7 @@ def insert_router():
         data = request.json
         print_category = data.get("category")
         print("New Category" + print_category)
-        rep = insert(user_id=data.get("user_id"), details=data.get("details"), category=data.get("category"), amount=float(data.get("amount")), class_=data.get("class"), date=data.get("date"))
+        rep = insert(user_id=data.get("user_id"), details=data.get("details"), category=data.get("category"), amount=float(data.get("amount")), class_=data.get("class"), date=data.get("date"), day=data.get("day"), month=data.get("month"), month_text=data.get("monthText"), year=data.get("year"))
         return jsonify(rep)
     
 
@@ -150,7 +150,7 @@ def edit_transaction_route():
         data = request.json
         print(data.get("date"))
         print(data.get("amount"))
-        edit_response = edit_transaction(details=data.get("details"), amount=data.get("amount"), category=data.get("category"), _class=data.get("class"), date=data.get("date"), user_id=data.get("user_id"), transaction_id=data.get("transaction_id"))
+        edit_response = edit_transaction(details=data.get("details"), amount=data.get("amount"), category=data.get("category"), _class=data.get("class"), date=data.get("date"), user_id=data.get("user_id"), transaction_id=data.get("transaction_id"), day=data.get("day"), month=data.get("month"),month_text=data.get("month_text"), year=data.get("year"))
 
         data = {
             "Statue": 200,

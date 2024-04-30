@@ -5,7 +5,10 @@ CREATE TABLE transaction(
     amount FLOAT,
     category VARCHAR(255),
     class VARCHAR(255),
-    date DATE
+    date DATE,
+    day INT,
+    month INT,
+    year INT
 );
 
 ALTER TABLE transaction  
